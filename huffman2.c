@@ -34,3 +34,11 @@ void remplir_noeud_rec(struct noeud* courant, int prof_actuelle, int prof_cible,
             printf("Erreur : arbre saturé ou mal construit.\n");
     }
 }
+
+struct noeud* racine = create_node(NULL); // Ne pas oublier !
+int j = 0;
+for (int i = 1; i <= 16; i++) {
+    for (int k = 0; k < Li[i - 1]; k++) {
+        remplir_noeud_rec(racine, 0, i, symb[j++]);
+    }
+}
