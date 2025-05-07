@@ -23,3 +23,10 @@ void remplir_noeud_rec(struct noeud* courant, int prof_actuelle, int prof_cible,
         remplir_noeud_rec(courant->parent, courant->parent->hauteur, prof_cible, symbole);
     }
 }
+
+int j = 0;
+for (int i = 1; i <= 16; i++) {
+    for (int k = 0; k < Li[i - 1]; k++) {
+        remplir_noeud_rec(racine, 0, i, symb[j++]);
+    }
+}
