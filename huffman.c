@@ -31,12 +31,17 @@ for (int i = 1; i <= 16; i++) {
     }
 }
 
-struct noeud* create_node() {
+struct noeud* create_node(struct noeud* parent) {
     struct noeud* n = malloc(sizeof(struct noeud));
     n->gche = NULL;
     n->droite = NULL;
-    n->parent = NULL;
-    n->val = -1; // ou autre valeur par défaut
-    n->hauteur = 0;
+    n->parent = parent;
+    n->val = -1; // Valeur par défaut, à changer plus tard
+
+    if (parent == NULL)
+        n->hauteur = 0; // Racine
+    else
+        n->hauteur = parent->hauteur + 1;
+
     return n;
 }
