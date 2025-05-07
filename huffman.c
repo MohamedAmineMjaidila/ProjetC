@@ -30,3 +30,13 @@ for (int i = 1; i <= 16; i++) {
         remplir_noeud_rec(racine, 0, i, symb[j++]);
     }
 }
+
+struct noeud* create_node() {
+    struct noeud* n = malloc(sizeof(struct noeud));
+    n->gche = NULL;
+    n->droite = NULL;
+    n->parent = NULL;
+    n->val = -1; // ou autre valeur par défaut
+    n->hauteur = 0;
+    return n;
+}
