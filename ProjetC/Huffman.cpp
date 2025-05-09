@@ -1,16 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
-struct node {
-    int val;
-    int depth;
-    struct node* parent;
-    struct node* left;
-    struct node* right;
-    bool is_full;
-};
-
-typedef struct node tree;
+#include "Huffman.h"
 
 tree* create_node(int val)
 {
@@ -64,6 +54,7 @@ bool add_node_at_hight(tree* root, int depth, int val)
     }
     else if (depth == 1)
     {
+        // Check if we can add on the left or right
         if (root->left == NULL)
         {
             add_node_left(root,val);
@@ -74,16 +65,11 @@ bool add_node_at_hight(tree* root, int depth, int val)
             add_node_right(root, val);
             return true;
         }
-        else
-        {
-            if(root->parent == NULL && root->parent->right = root)
-            {
-                
-            }
-        }
+        return false;
     }
     else if (root->left == NULL && depth > 1)
     {
+        // Add left first
         bool is_added = add_node_at_hight(root->left, depth - 1, val);
         if (is_added == true)
         {
@@ -92,4 +78,7 @@ bool add_node_at_hight(tree* root, int depth, int val)
         is_added = add_node_at_hight(root->right, depth - 1, val);
         return is_added;
     }
+
 }
+
+bool build_huffman_tree()

@@ -2,10 +2,12 @@
 //
 
 #include <iostream>
-
+#include "Huffman.cpp"
 int main()
 {
     std::cout << "Hello World!\n";
+    // Test Huffman : 
+    tree* root = 
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
