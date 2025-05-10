@@ -124,7 +124,6 @@ bool add_node_at_hight(Node* root, int depth, int val)
         }
     }
 }
-
 Node* build_huffman_tree(Hex* huffman_lengths, Hex2* huffman_symbols, int* count)
 {
     //Every empty value will be given a 0, as 0 is impossible value to have as a symbol
@@ -155,7 +154,7 @@ Hex2 get_symbole_from_code(Node* root, Code* code)
     int length = code->length;
     for (int i = 0;i < length;i++)
     {
-        if (code->code[i] == '0')
+        if (code->string[i] == '0')
         {
             if (root_iter->left == NULL)
             {
@@ -175,6 +174,108 @@ Hex2 get_symbole_from_code(Node* root, Code* code)
         }
     }
     return root_iter->val;
+}
+Code* get_octet_from_stream()
+{
+    // Pas le vrai code
+    Code* code = (Code*)malloc(sizeof(Code));
+    code->string = (char*)malloc(sizeof(char) * 8);
+    code->string[0] = '1';
+    code->string[1] = '0';
+    code->string[2] = '1';
+    code->string[2] = '0';
+    code->string[2] = '0';
+    code->string[2] = '0';
+    code->string[2] = '1';
+    code->string[3] = '\0';
+}
+
+// Normally it would have the path to a file
+
+int get_magnitude_cell(int n, char* string)
+{
+    int magnitude_cell = 0;
+    for(int i = 0; i < n;i++)
+    {
+        char iter = string[n - i - 1];
+        if (iter == '0')
+        {
+            magnitude_cell += 2 ^ i;
+        }
+    }
+    return magnitude_cell;
+}
+
+int* get_symboles_from_MCU(Node* root)
+{
+    int count = 0;
+    int ac_coeffs[AC_COEFFS_COUNT];
+
+    Code* code = get_octet_from_stream();
+    int length = code->length;
+    char* buffer_code = code->string;
+
+    bool code_found = false;
+    Node* root_iter = root;
+    int i = 0;
+
+    // Short-Inter 
+    Hex2 symbol_iter = 0;
+
+    while(i<length)
+    {
+        code_found = advance_from_code(root_iter, buffer_code[i],&root_iter);
+        if (code_found)
+        {
+            symbol_iter = root_iter->val;
+            root_iter = root;
+        }
+        i++;
+    }
+
+}
+bool advance_from_code(Node* root, char code, Node** out_root)
+{
+    if (code == '0')
+    {
+        if (root->left != NULL)
+        {
+            *out_root = root->left;
+            if (root->left->val != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            printf("root->left is NULL, there is a problem");
+            return false;
+        }
+    }
+    else if(code == '1')
+    {
+        if (root->right != NULL)
+        {
+            *out_root = root->right;
+            if (root->right->val != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            printf("root->right is NULL, there is a problem");
+            return false;
+        }
+    }
 }
 
 void draw_tree_hor2(Node* tra, int depth, char* path, int right)
@@ -237,7 +338,6 @@ void draw_tree_hor2(Node* tra, int depth, char* path, int right)
     // go to left Node
     draw_tree_hor2(tra->left, depth, path, 0);
 }
-
 void draw_tree_hor(Node* Node)
 {
     // should check if we don't exceed this somehow..

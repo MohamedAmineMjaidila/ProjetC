@@ -3,9 +3,9 @@
 #include <stdint.h>
 
 #define space 5
-
+#define AC_COEFFS_COUNT 63
 struct Code {
-    char* code;
+    char* string;
     int length;
 };
 
@@ -32,3 +32,4 @@ Node* build_huffman_tree(Hex* huffman_lengths, Hex2* huffman_symbols,int* count)
 void draw_tree_hor(Node* Node);
 void draw_tree_hor2(Node* tra, int depth, char* path, int right);
 Hex2 get_symbole_from_code(Node* root, Code* code);
+bool advance_from_code(Node* root, char code, Node** out_root);
