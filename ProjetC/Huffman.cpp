@@ -175,6 +175,10 @@ Hex2 get_symbole_from_code(Node* root, Code* code)
     }
     return root_iter->val;
 }
+
+
+
+/* Code not to be used yet
 Code* get_octet_from_stream()
 {
     // Pas le vrai code
@@ -189,9 +193,6 @@ Code* get_octet_from_stream()
     code->string[2] = '1';
     code->string[3] = '\0';
 }
-
-// Normally it would have the path to a file
-
 int get_magnitude_cell(int n, char* string)
 {
     int magnitude_cell = 0;
@@ -205,7 +206,6 @@ int get_magnitude_cell(int n, char* string)
     }
     return magnitude_cell;
 }
-
 int* get_symboles_from_MCU(Node* root)
 {
     int count = 0;
@@ -277,7 +277,7 @@ bool advance_from_code(Node* root, char code, Node** out_root)
         }
     }
 }
-
+*/
 void draw_tree_hor2(Node* tra, int depth, char* path, int right)
 {
     // stopping condition
