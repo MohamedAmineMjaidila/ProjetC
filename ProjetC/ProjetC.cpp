@@ -16,6 +16,11 @@ int main()
     Hex huffman_lengths[] = { 0x00, 0x01, 0x01, 0x01 };
     Hex2 huffman_symbols[] = { 0x12, 0xAB, 0x20 };
     Node* root = build_huffman_tree(huffman_lengths, huffman_symbols, table_size);
+    char code_char[] = "10";
+    Code code = { code_char,2 };
+    Hex2 symbol = get_symbole_from_code(root, &code);
+    printf("Symbole");
+    printf("%x",symbol);
     draw_tree_hor(root);
 
     // Test 

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Huffman.h"
-
+#include <string.h>
 
 Node* create_node()
 {
@@ -149,9 +149,32 @@ Node* build_huffman_tree(Hex* huffman_lengths, Hex2* huffman_symbols, int* count
     return root;
 }
 
-Hex2 get_symbole_from_char(char* code)
+Hex2 get_symbole_from_code(Node* root, Code* code)
 {
-    return NULL;
+    Node* root_iter = root;
+    int length = code->length;
+    for (int i = 0;i < length;i++)
+    {
+        if (code->code[i] == '0')
+        {
+            if (root_iter->left == NULL)
+            {
+                printf("Code non valable");
+                return NULL;
+            }
+            root_iter = root_iter->left;
+        }
+        else
+        {
+            if (root_iter->right == NULL)
+            {
+                printf("Code non valable");
+                return NULL;
+            }
+            root_iter = root_iter->right;
+        }
+    }
+    return root_iter->val;
 }
 
 void draw_tree_hor2(Node* tra, int depth, char* path, int right)
