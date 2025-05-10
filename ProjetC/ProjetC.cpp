@@ -2,13 +2,25 @@
 //
 
 #include <iostream>
-#include "Huffman.cpp"
+#include "Huffman.h"
+
+Node n1, n2, n3, n4, n5, n6, n7;
+
 int main()
 {
+
     std::cout << "Hello World!\n";
     // Test Huffman : 
-    tree* root = 
+
+    int table_size[] = {4,4};
+    Hex huffman_lengths[] = { 0x00, 0x01, 0x01, 0x01 };
+    Hex2 huffman_symbols[] = { 0x12, 0xAB, 0x20 };
+    Node* root = build_huffman_tree(huffman_lengths, huffman_symbols, table_size);
+    draw_tree_hor(root);
+
+    // Test 
 }
+
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
 // Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
